@@ -1,0 +1,12 @@
+### POST request to create patients
+POST http://localhost:4000/patients
+Content-Type: application/json
+
+{
+  "name": "John Doe Billing KAFKA Test",
+  "email": "kafka124@gmail.com",
+  "address": "123456 main",
+  "dateOfBirth": "1998-09-09",
+  "registeredDate": "2024-12-28"
+}
+###
