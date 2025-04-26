@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  analytics-service:
+    build: ./analytics-service
+    expose:
+      - "4002"
+    networks:
+      - internal
+
+  api-gateway:
+    build: ./api-gateway
+    ports:
+      - "4004:4004"  # Expose gateway for public access
+    networks:
+      - internal
+    depends_on:
+      - auth-service
+      - patient-service
+      - analytics-service
+      - billing-service
+
+  auth-service:
+    build: ./auth-service
+    expose:
+      - "4005"
+    networks:
+      - internal
+
+  billing-service:
+    build: ./billing-service
+    expose:
+      - "9001"
+    networks:
+      - internal
+
+  patient-service:
+    build: ./patient-service
+    expose:
+      - "4000"
+    networks:
+      - internal
+
+networks:
+  internal:
+    driver: bridge
+    internal: true
